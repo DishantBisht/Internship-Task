@@ -1,10 +1,10 @@
 import {applyMiddleware, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import {todos} from './todosReducer';
+import {rows} from './rowsReducer';
 
 export const ConfigureStore = () => {
-    const store = createStore(todos,applyMiddleware(thunk,logger));
+    const store = createStore(rows,applyMiddleware(thunk,logger));
 
     return store;
 }

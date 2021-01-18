@@ -11,6 +11,8 @@ function App() {
     <div className="App">
       <Provider store={store}>
           <BrowserRouter>
+          <nav className="navbar navbar-dark bg-dark justify-content-center">
+          <h2>Findmind Internship Task</h2></nav>
             <Main />
           </BrowserRouter>
       </Provider>

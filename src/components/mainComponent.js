@@ -3,7 +3,7 @@ import SignUp from "./signUpComponent";
 import LogIn from "./logInComponent";
 import List from "./listComponent";
 import {connect} from 'react-redux';
-import {fetchTodos, postTodo, deleteTodo, putTodo} from '../redux/actionCreators';
+import {fetchRows, postRow, deleteRow, putRow} from '../redux/actionCreators';
 
 import {
     withRouter,
@@ -12,29 +12,33 @@ import {
     Redirect
   } from "react-router-dom";
 
-const mapStateToProps = state => {
+
+  const mapStateToProps = state => {
     return {
-      todos: state.todos
+      rows: state.rows
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchTodos: () => { dispatch(fetchTodos())},
-    postTodo: (name, description) => dispatch(postTodo(name, description)),
-    deleteTodo: (todoId) => dispatch(deleteTodo(todoId)),
-    putTodo: (todoId, name, description) => dispatch(putTodo(todoId, name, description))
+    fetchRows: () => { dispatch(fetchRows())},
+    postRow: (name, description) => dispatch(postRow(name, description)),
+    deleteRow: (rowId) => dispatch(deleteRow(rowId)),
+    putRow: (rowId, name, description) => dispatch(putRow(rowId, name, description))
 });
 
 class Main extends Component{
+    componentDidMount(){
+        this.props.fetchRows();
+    }
 
     render(){
         const ListCall = ({match}) => {
-            this.props.fetchTodos();
+            
             return(
-              <List todos={this.props.todos}
-                postTodo={this.props.postComment}
-                putTodo ={this.props.putTodo}
-                deleteTodo ={this.props.deleteTodo}
+              <List rows={this.props.rows}
+                postRow={this.props.postComment}
+                putRow ={this.props.putRow}
+                deleteRow ={this.props.deleteRow}
                 />
         )};
         return(

@@ -36,7 +36,7 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} action="/" style={{padding:"40px", height:'70%', width: '60 %'}}>
+            <form className='container' onSubmit={this.handleSubmit} action="/" style={{padding:"40px", height:'70%', width: '60 %'}}>
                 <h3>Sign Up</h3>
 
                 <div className="form-group">

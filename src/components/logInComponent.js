@@ -38,8 +38,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div >
-            <form onSubmit={this.handleSubmit}>
+            <form className='container' onSubmit={this.handleSubmit} style={{padding:"40px", height:'70%', width: '60 %'}}>
                 <h3>Log in</h3>
                 <div className="form-group">
                     <label>Email</label>
@@ -55,13 +54,11 @@ export default class Login extends Component {
                         <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
+                <button type="submit" className="btn btn-dark btn-lg btn-block">Log in</button>
                 <p className="forgot-password text-right">
                     Not Registered yet! <a href="/SignUp">Sign Up?</a>
                 </p>
-            </form>
-            </div>
-            
+            </form>            
         );
     }
 }

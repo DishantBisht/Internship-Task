@@ -1,8 +1,10 @@
 import { baseUrl } from '../shared/baseUrl';
 
-export const fetchTodos = () => (dispatch) => {
+export const fetchRows = () => (dispatch) => {
 
-    return fetch(baseUrl + 'todos/?_limit=20')
+    dispatch(rowsLoading(true));
+
+    return fetch(baseUrl + 'rows')
     .then(response => {
         if (response.ok) {
           return response;
@@ -17,33 +19,33 @@ export const fetchTodos = () => (dispatch) => {
             throw errmess;
       })
     .then(response => response.json())
-    .then(todos => dispatch(addTodos(todos)))
-    .catch(error => dispatch(todosFailed(error.message)));
+    .then(rows => dispatch(addRows(rows)))
+    .catch(error => dispatch(rowsFailed(error.message)));
 }
 
-export const todosLoading = () => ({
-    type: "TODOS_LOADING"
+export const rowsLoading = () => ({
+    type: "ROWS_LOADING"
 });
 
-export const todosFailed = (errmess) => ({
-    type: "TODOS_FAILED",
+export const rowsFailed = (errmess) => ({
+    type: "ROWS_FAILED",
     payload: errmess
 });
 
-export const addTodos = (todos) => ({
-    type: "ADD_TODOS",
-    payload: todos
+export const addRows = (rows) => ({
+    type: "ADD_ROWS",
+    payload: rows
 });
 
-export const postTodo = (name, description) => (dispatch) => {
-  const newTodo = {
+export const postRow = (name, description) => (dispatch) => {
+  const newRow = {
       name: name,
       description: description
   };
   
-  return fetch(baseUrl + 'todos', {
+  return fetch(baseUrl + 'rows', {
       method: "POST",
-      body: JSON.stringify(newTodo),
+      body: JSON.stringify(newRow),
       headers: {
         "Content-Type": "application/json"
       },
@@ -62,13 +64,13 @@ export const postTodo = (name, description) => (dispatch) => {
           throw error;
     })
   .then(response => response.json())
-  .then(response => dispatch(addTodos(response)))
-  .catch(error =>  { console.log('post todos', error.message); alert('Your todo could not be posted\nError: '+error.message); });
+  .then(response => dispatch(addRows(response)))
+  .catch(error =>  { console.log('post rows', error.message); alert('Your row could not be posted\nError: '+error.message); });
 };
 
-export const deleteTodo = (todoId) => (dispatch) => {
+export const deleteRow = (rowId) => (dispatch) => {
   
-  return fetch(baseUrl + 'todos/' + todoId, {
+  return fetch(baseUrl + 'rows/' + rowId, {
       method: "DELETE",
       body: JSON.stringify(),
       headers: {
@@ -89,19 +91,19 @@ export const deleteTodo = (todoId) => (dispatch) => {
           throw error;
     })
   .then(response => response.json())
-  .then(response => dispatch(fetchTodos()))
-  .catch(error =>  { console.log('post todos', error.message); alert('Your todo could not be deleted\nError: '+error.message); });
+  .then(response => dispatch(fetchRows()))
+  .catch(error =>  { console.log('post rows', error.message); alert('Your row could not be deleted\nError: '+error.message); });
 };
 
-export const putTodo = (todoId ,name, description) => (dispatch) => {
-  const newTodo = {
+export const putRow = (rowId ,name, description) => (dispatch) => {
+  const newRow = {
       name: name,
       description: description
   };
   
-  return fetch(baseUrl + 'todos/'+ todoId, {
+  return fetch(baseUrl + 'rows/'+ rowId, {
       method: "PUT",
-      body: JSON.stringify(newTodo),
+      body: JSON.stringify(newRow),
       headers: {
         "Content-Type": "application/json"
       },
@@ -120,6 +122,6 @@ export const putTodo = (todoId ,name, description) => (dispatch) => {
           throw error;
     })
   .then(response => response.json())
-  .then(response => dispatch(fetchTodos()))
-  .catch(error =>  { console.log('put todos', error.message); alert('Your todo could not be updated\nError: '+error.message); });
+  .then(response => dispatch(fetchRows()))
+  .catch(error =>  { console.log('put rows', error.message); alert('Your row could not be updated\nError: '+error.message); });
 };
